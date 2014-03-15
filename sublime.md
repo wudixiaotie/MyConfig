@@ -1,11 +1,16 @@
 Settings-User:
 {
-	"font_size": 21,
-	"rulers":
-	[
-		80
-	],
-	"tab_size": 2
+  "font_size": 14,
+  "ignored_packages":
+  [
+    "Vintage"
+  ],
+  "rulers":
+  [
+    80
+  ],
+  "tab_size": 2,
+  "translate_tabs_to_spaces": true
 }
 
 Key Bindings-User:
