@@ -14,17 +14,25 @@ Settings-User:
 }
 
 Key Bindings-User:
-[
-	{ "keys": ["ctrl+e", "ctrl+d"], "command": "reindent" },
-	{
-		"keys": ["alt+shift+2"],
-		"command": "set_layout",
-		"args":
-		{
-			"cols": [0.0, 1.0],
-			"rows": [0.0, 0.5, 1.0],
-			"cells": [[0, 0, 1, 1], [0, 1, 1, 2]]
-		}
-	},
+[ 
+  { "keys": ["super+e", "super+d"], "command": "reindent" },
+  {
+    "keys": ["super+shift+2"],
+    "command": "set_layout",
+    "args": {
+      "cols": [0.0, 1.0],
+      "rows": [0.0, 0.5, 1.0],
+      "cells": [[0, 0, 1, 1], [0, 1, 1, 2]]
+    }
+  },
+  {
+    "keys": ["super+shift+1"],
+    "command": "set_layout",
+    "args": {
+      "cols": [0.0, 1.0],
+      "rows": [0.0, 1.0],
+      "cells": [[0, 0, 1, 1]]
+    }
+  }
 ]
 
