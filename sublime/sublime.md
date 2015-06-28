@@ -24,6 +24,8 @@ Settings-User:
   // Highlight active indent
   "indent_guide_options": [ "draw_normal", "draw_active" ]
 }
+
+
 Key Bindings-User:
 [ 
   { "keys": ["super+e", "super+d"], "command": "reindent" },
