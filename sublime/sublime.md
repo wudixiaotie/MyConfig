@@ -6,7 +6,7 @@ Settings-User:
   [
   	"Vintage"
   ],
-  "tab_size": 2,
+  "tab_size": 4,
   "rulers":
   [
     80
@@ -24,6 +24,7 @@ Settings-User:
   // Highlight active indent
   "indent_guide_options": [ "draw_normal", "draw_active" ]
 }
+
 
 
 Key Bindings-User:
