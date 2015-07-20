@@ -1,11 +1,14 @@
 <snippet>
     <content><![CDATA[
--else.
+%% ===================================================================
+%% ${1:Annotation}
+%% ===================================================================
+
 ]]></content>
     <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-    <tabTrigger>el</tabTrigger>
+    <tabTrigger>ann</tabTrigger>
     <!-- Optional: Set a scope to limit where the snippet will trigger -->
     <scope>source.erlang</scope>
     <!-- Optional: Description to show in the menu -->
-    <description>Else</description>
+    <description>Annotation</description>
 </snippet>
