@@ -1,6 +1,6 @@
 Settings-User:
 {
-  "font_face": "Courier New",
+  "font_face": "DejaVu Sans Mono",
   "font_size": 14,
   "ignored_packages":
   [
