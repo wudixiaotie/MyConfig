@@ -1,0 +1,27 @@
+{
+	"folders":
+	[
+		{
+			"path": "learn_rust"
+		},
+		{
+			"path": "algorithm"
+		},
+		{
+			"path": "erlang_memo",
+			"folder_exclude_patterns": ["_deploy", "SpryAssets", "SpryPaging", "wireframe"],
+		},
+		{
+			"path": "simple_im",
+			"file_exclude_patterns": ["*.beam"]
+		},
+		{
+			"path": "simple_im_client",
+			"file_exclude_patterns": ["*.beam"]
+		},
+		{
+			"path": "/usr/local/lib/erlang/lib",
+			"file_exclude_patterns": ["*.beam"]
+		}
+	]
+}
