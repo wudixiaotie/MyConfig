@@ -13,7 +13,7 @@ Settings-User:
 	],
 	"translate_tabs_to_spaces": true,
 	"theme": "Material-Theme-Darker.sublime-theme",
-	"color_scheme": "Packages/Material Theme/schemes/Material-Theme-Darker.tmTheme",
+	"color_scheme": "Packages/Material Theme/schemes/Material-Theme-Darker-OceanicNext.tmTheme",
 	"material_theme_accent_lime": true,
 	"overlay_scroll_bars": "enabled",
 	"line_padding_top": 3,
