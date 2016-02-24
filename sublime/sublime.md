@@ -15,6 +15,7 @@ Settings-User:
 	"theme": "Material-Theme-Darker.sublime-theme",
 	"color_scheme": "Packages/Material Theme/schemes/Material-Theme-Darker.tmTheme",
 	"material_theme_accent_lime": true,
+	"material_theme_contrast_mode": true,
 	"overlay_scroll_bars": "enabled",
 	"line_padding_top": 3,
 	"line_padding_bottom": 3,
