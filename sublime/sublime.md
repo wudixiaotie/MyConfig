@@ -25,7 +25,8 @@ Settings-User:
 	],
 	"tab_size": 4,
 	"theme": "Material-Theme-Darker.sublime-theme",
-	"translate_tabs_to_spaces": true
+	"translate_tabs_to_spaces": true,
+	"show_full_path": true
 }
 
 
