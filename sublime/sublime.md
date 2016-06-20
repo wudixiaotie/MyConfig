@@ -3,7 +3,7 @@ Settings-User:
 	"always_show_minimap_viewport": true,
 	"bold_folder_labels": true,
 	"color_scheme": "Packages/Material Theme/schemes/Material-Theme-Darker.tmTheme",
-	"font_face": "DejaVu Sans Mono",
+	"font_face": "DejaVu Sans Mono", //Ubuntu Only
 	"font_size": 11,
 	"ignored_packages":
 	[
