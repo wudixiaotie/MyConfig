@@ -269,6 +269,7 @@ you should place your code here."
       (message "%d line%s copied" arg (if (= 1 arg) "" "s")))
     ;; optional key binding
     (global-set-key "\C-c\C-k" 'copy-line)
+    (global-set-key [C-tab] 'switch-to-next-buffer)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
