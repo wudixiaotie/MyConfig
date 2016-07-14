@@ -267,9 +267,19 @@ you should place your code here."
       (kill-ring-save (line-beginning-position)
                       (line-beginning-position (+ 1 arg)))
       (message "%d line%s copied" arg (if (= 1 arg) "" "s")))
+
+    ;; newline-without-break-of-line
+    (defun newline-without-break-of-line ()
+      "1. move to end of the line. 2. insert newline with index"
+      (interactive)
+      (let ((oldpos (point)))
+        (end-of-line)
+        (newline-and-indent)))
+
     ;; optional key binding
-    (global-set-key "\C-c\C-k" 'copy-line)
+    (global-set-key "\C-c\k" 'copy-line)
     (global-set-key [C-tab] 'switch-to-next-buffer)
+    (global-set-key (kbd "<C-return>") 'newline-without-break-of-line)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
