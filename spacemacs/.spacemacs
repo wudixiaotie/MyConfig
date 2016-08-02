@@ -285,6 +285,8 @@ you should place your code here."
     (ivy-mode 1)
     (setq ivy-use-virtual-buffers t)
     (setq ivy-extra-directories nil)
+    (setq ivy-re-builders-alist
+          '((t . ivy--regex-fuzzy)))
     (global-set-key "\C-s" 'swiper)
     (global-set-key (kbd "C-c C-r") 'ivy-resume)
     (global-set-key (kbd "<f6>") 'ivy-resume)
