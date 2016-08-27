@@ -46,7 +46,10 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages
+   '(
+     multiple-cursors
+     )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -255,56 +258,75 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-    (global-linum-mode t)
-    (turn-on-fci-mode)
+  (global-linum-mode t)
+  (global-company-mode)
+  (delete-selection-mode 1)
 
-    ;; ==========================================================================
-    ;; My key-bindings
-    ;; ==========================================================================
-    (defun copy-line (arg)
-      "Copy lines (as many as prefix argument) in the kill ring"
-      (interactive "p")
-      (kill-ring-save (line-beginning-position)
-                      (line-beginning-position (+ 1 arg)))
-      (message "%d line%s copied" arg (if (= 1 arg) "" "s")))
+  ;; ==========================================================================
+  ;; My key-bindings
+  ;; ==========================================================================
+  ;; newline-without-break-of-line
+  (defun newline-without-break-of-line ()
+    "1. move to end of the line. 2. insert newline with index"
+    (interactive)
+    (let ((oldpos (point)))
+      (end-of-line)
+      (newline-and-indent)))
 
-    ;; newline-without-break-of-line
-    (defun newline-without-break-of-line ()
-      "1. move to end of the line. 2. insert newline with index"
-      (interactive)
-      (let ((oldpos (point)))
-        (end-of-line)
-        (newline-and-indent)))
+  ;; optional key binding
+  (global-set-key [C-tab] 'switch-to-next-buffer)
+  (global-set-key (kbd "<C-return>") 'newline-without-break-of-line)
 
-    ;; optional key binding
-    (global-set-key "\C-c\k" 'copy-line)
-    (global-set-key [C-tab] 'switch-to-next-buffer)
-    (global-set-key (kbd "<C-return>") 'newline-without-break-of-line)
+  ;; ==========================================================================
+  ;; ivy
+  ;; ==========================================================================
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-extra-directories nil)
+  (setq ivy-re-builders-alist
+        '((t . ivy--regex-fuzzy)))
+  (global-set-key "\C-s" 'swiper)
+  (global-set-key (kbd "C-c C-r") 'ivy-resume)
+  (global-set-key (kbd "<f6>") 'ivy-resume)
+  (global-set-key (kbd "M-x") 'counsel-M-x)
+  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+  (global-set-key (kbd "<f1> f") 'counsel-describe-function)
+  (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+  (global-set-key (kbd "<f1> l") 'counsel-load-library)
+  (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+  (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+  (global-set-key (kbd "C-c g") 'counsel-git)
+  (global-set-key (kbd "C-c j") 'counsel-git-grep)
+  (global-set-key (kbd "C-c k") 'counsel-ag)
+  (global-set-key (kbd "C-x l") 'counsel-locate)
+  (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+  (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
+  (define-key ivy-minibuffer-map (kbd "<return>") 'ivy-alt-done)
 
-    ;; ivy-mode
-    (ivy-mode 1)
-    (setq ivy-use-virtual-buffers t)
-    (setq ivy-extra-directories nil)
-    (setq ivy-re-builders-alist
-          '((t . ivy--regex-fuzzy)))
-    (global-set-key "\C-s" 'swiper)
-    (global-set-key (kbd "C-c C-r") 'ivy-resume)
-    (global-set-key (kbd "<f6>") 'ivy-resume)
-    (global-set-key (kbd "M-x") 'counsel-M-x)
-    (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-    (global-set-key (kbd "<f1> f") 'counsel-describe-function)
-    (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
-    (global-set-key (kbd "<f1> l") 'counsel-load-library)
-    (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
-    (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
-    (global-set-key (kbd "C-c g") 'counsel-git)
-    (global-set-key (kbd "C-c j") 'counsel-git-grep)
-    (global-set-key (kbd "C-c k") 'counsel-ag)
-    (global-set-key (kbd "C-x l") 'counsel-locate)
-    (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
-    (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
-    (define-key ivy-minibuffer-map (kbd "<return>") 'ivy-alt-done)
-  )
+  ;; ==========================================================================
+  ;; erlang-mode
+  ;; ==========================================================================
+  (defun my-erlang-mode-hook ()
+    ;; when starting an Erlang shell in Emacs, default in the node name
+    (setq inferior-erlang-machine-options '("-sname" "emacs"))
+    ;; add Erlang functions to an imenu menu
+    (imenu-add-to-menubar "imenu")
+    ;; customize keys
+    (local-set-key [return] 'newline-and-indent)
+    )
 
+  ;; ==========================================================================
+  ;; comment
+  ;; ==========================================================================
+  (global-set-key (kbd "C-c C-x") 'comment-or-uncomment-region)
+
+  ;; ==========================================================================
+  ;; multiple-cursors
+  ;; ==========================================================================
+  (require 'multiple-cursors)
+  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+  (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+)
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
