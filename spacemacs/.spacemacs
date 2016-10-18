@@ -301,20 +301,32 @@ you should place your code here."
   (global-set-key (kbd "C-c k") 'counsel-ag)
   (global-set-key (kbd "C-x l") 'counsel-locate)
   (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+  (global-set-key (kbd "C-x C-b") 'switch-to-buffer)
   (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
   (define-key ivy-minibuffer-map (kbd "<return>") 'ivy-alt-done)
 
   ;; ==========================================================================
   ;; erlang-mode
   ;; ==========================================================================
+  (add-hook 'erlang-mode-hook 'my-erlang-mode-hook)
   (defun my-erlang-mode-hook ()
     ;; when starting an Erlang shell in Emacs, default in the node name
     (setq inferior-erlang-machine-options '("-sname" "emacs"))
     ;; add Erlang functions to an imenu menu
     (imenu-add-to-menubar "imenu")
     ;; customize keys
-    (local-set-key [return] 'newline-and-indent)
-    )
+    (local-set-key [return] 'newline-and-indent))
+
+  (add-hook 'erlang-mode-hook 'folding-erlang-mode-hook)
+  (defun folding-erlang-mode-hook ()
+    (setq hs-special-modes-alist
+          (cons '(erlang-mode
+                  "^\\([a-z][a-zA-Z0-9_]*\\|'[^\n']*[^\\]'\\)\\s *(" nil "%"
+                  erlang-end-of-clause) hs-special-modes-alist))
+    (hs-minor-mode 1)
+    (local-set-key [?\M-s] 'hs-toggle-hiding)
+    (local-set-key [?\M-h] 'hs-hide-all)
+    (local-set-key [?\M-u] 'hs-show-all))
 
   ;; ==========================================================================
   ;; comment
@@ -328,6 +340,14 @@ you should place your code here."
   (global-set-key (kbd "C->") 'mc/mark-next-like-this)
   (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
   (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+  ;; ==========================================================================
+  ;; Scrolling
+  ;; ==========================================================================
+  (setq mouse-wheel-progressive-speed nil)
+  (setq mouse-wheel-follow-mouse 't)
+  (setq mac-mouse-wheel-mode t)
+  (setq mac-mouse-wheel-smooth-scroll t)
 )
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
