@@ -349,11 +349,6 @@ you should place your code here."
   (setq mouse-wheel-follow-mouse 't)
   (setq mac-mouse-wheel-mode t)
   (setq mac-mouse-wheel-smooth-scroll t)
-
-  ;; ==========================================================================
-  ;; Frame
-  ;; ==========================================================================
-  (global-set-key (kbd "s-1") 'other-frame)
 )
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
