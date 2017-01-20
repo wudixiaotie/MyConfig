@@ -262,6 +262,7 @@ you should place your code here."
   (global-linum-mode t)
   (global-company-mode)
   (delete-selection-mode 1)
+  (display-time-mode 1)
 
   ;; ==========================================================================
   ;; My key-bindings
