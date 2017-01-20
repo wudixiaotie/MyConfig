@@ -3,7 +3,7 @@ alias ll='ls -lAFGh'
 export GREP_OPTIONS='--color=always'
 export GREP_COLOR='1;36;40'
 export CLICOLOR=1
-export LSCOLORS=GxFxCxDxBxegedabagaced
+export LSCOLORS=ExFxGxDxCxegedabagaced
 
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
     source $(brew --prefix)/etc/bash_completion.d/git-completion.bash
