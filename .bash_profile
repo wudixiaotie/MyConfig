@@ -1,5 +1,6 @@
 alias l='ls -alFGh'
 alias ll='ls -lAFGh'
+alias t='tree'
 export GREP_OPTIONS='--color=always'
 export GREP_COLOR='1;36;40'
 export CLICOLOR=1
@@ -45,12 +46,4 @@ function my_prompt_command() {
     local BCYAN='\[\e[1;36m\]'
     local BGCYAN='\[\e[1;36m\]'
     local WHITE='\[\e[0;37m\]'
-    local BWHITE='\[\e[1;37m\]'
-    local BGWHITE='\[\e[1;37m\]'
-
-    if [ $exit_code -ne 0  ]; then
-        prompt_prefix="${BRED}(${exit_code})"
-    fi
-
-    PS1="\n${BGREEN}[${BYELLOW}\D{%m/%d} ${BGREEN}\t:${BCYAN}\w${BGREEN}]\n${prompt_prefix}>${DF} "
-}
+".bash_profile" 59L, 1816C
