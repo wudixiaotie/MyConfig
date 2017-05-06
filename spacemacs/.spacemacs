@@ -42,6 +42,8 @@ values."
      erlang
      erlang-rebar
      javascript
+     python
+     java
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -50,6 +52,7 @@ values."
    dotspacemacs-additional-packages
    '(
      multiple-cursors
+     java-snippets
      )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
