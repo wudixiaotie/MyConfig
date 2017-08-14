@@ -393,13 +393,8 @@ you should place your code here."
   ;; ==========================================================================
   ;; c-c++-mode
   ;; ==========================================================================
-  (setq-default dotspacemacs-configuration-layers
-                '((c-c++ :variables
-                         c-c++-default-mode-for-headers 'c++-mode)))
-  (setq-default dotspacemacs-configuration-layers
-                '((c-c++ :variables c-c++-enable-clang-support t)))
-  (setq-default dotspacemacs-configuration-layers
-                '((c-c++ :variables c-c++-enable-clang-format-on-save t)))
+  (setq c-c++-default-mode-for-headers 'c++-mode)
+  (setq c-c++-enable-clang-support t)
   ;; Bind clang-format-buffer to tab on the c++-mode only:
   ;; Need install clang-format: brew install clang-format
   (add-hook 'c++-mode-hook 'clang-format-bindings)
