@@ -57,6 +57,8 @@ values."
      javascript
      python
      java
+     csv
+     c-c++
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -387,6 +389,22 @@ you should place your code here."
   (setq mouse-wheel-follow-mouse 't)
   (setq mac-mouse-wheel-mode t)
   (setq mac-mouse-wheel-smooth-scroll t)
+
+  ;; ==========================================================================
+  ;; c-c++-mode
+  ;; ==========================================================================
+  (setq-default dotspacemacs-configuration-layers
+                '((c-c++ :variables
+                         c-c++-default-mode-for-headers 'c++-mode)))
+  (setq-default dotspacemacs-configuration-layers
+                '((c-c++ :variables c-c++-enable-clang-support t)))
+  (setq-default dotspacemacs-configuration-layers
+                '((c-c++ :variables c-c++-enable-clang-format-on-save t)))
+  ;; Bind clang-format-buffer to tab on the c++-mode only:
+  ;; Need install clang-format: brew install clang-format
+  (add-hook 'c++-mode-hook 'clang-format-bindings)
+  (defun clang-format-bindings ()
+    (define-key c++-mode-map [tab] 'clang-format-buffer))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
