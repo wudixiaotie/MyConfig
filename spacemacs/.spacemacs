@@ -400,6 +400,10 @@ you should place your code here."
   (add-hook 'c++-mode-hook 'clang-format-bindings)
   (defun clang-format-bindings ()
     (define-key c++-mode-map [tab] 'clang-format-buffer))
+  ;; Set c++ standard to 11
+  (add-hook 'c++-mode-hook 'clang-flycheck-gcc)
+  (defun clang-flycheck-gcc ()
+    (setq flycheck-gcc-language-standard "c++11"))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
