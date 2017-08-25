@@ -56,7 +56,6 @@ values."
      erlang-rebar
      javascript
      python
-     java
      csv
      c-c++
      )
@@ -67,7 +66,7 @@ values."
    dotspacemacs-additional-packages
    '(
      multiple-cursors
-     java-snippets
+     modern-cpp-font-lock
      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -314,6 +313,10 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+  (setq configuration-layer--elpa-archives
+        '(("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
+          ("org-cn"   . "http://elpa.emacs-china.org/org/")
+          ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")))
   )
 
 (defun dotspacemacs/user-config ()
@@ -393,6 +396,7 @@ you should place your code here."
   ;; ==========================================================================
   ;; c-c++-mode
   ;; ==========================================================================
+  (add-hook 'c++-mode-hook #'modern-c++-font-lock-mode)
   (setq c-c++-default-mode-for-headers 'c++-mode)
   (setq c-c++-enable-clang-support t)
   ;; Bind clang-format-buffer to tab on the c++-mode only:
@@ -403,7 +407,8 @@ you should place your code here."
   ;; Set c++ standard to 11
   (add-hook 'c++-mode-hook 'clang-flycheck)
   (defun clang-flycheck ()
-    (setq flycheck-clang-language-standard "c++11"))
+    (setq flycheck-clang-language-standard "c++14")
+    (setq company-clang-arguments '("-std=c++14")))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
