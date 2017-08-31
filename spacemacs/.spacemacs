@@ -399,16 +399,17 @@ you should place your code here."
   (add-hook 'c++-mode-hook #'modern-c++-font-lock-mode)
   (setq c-c++-default-mode-for-headers 'c++-mode)
   (setq c-c++-enable-clang-support t)
-  ;; Bind clang-format-buffer to tab on the c++-mode only:
-  ;; Need install clang-format: brew install clang-format
-  (add-hook 'c++-mode-hook 'clang-format-bindings)
-  (defun clang-format-bindings ()
-    (define-key c++-mode-map [tab] 'clang-format-buffer))
-  ;; Set c++ standard to 11
-  (add-hook 'c++-mode-hook 'clang-flycheck)
-  (defun clang-flycheck ()
+  (add-hook 'c++-mode-hook 'my-c++-model-hook)
+  (defun my-c++-model-hook ()
+    ;; Bind clang-format-buffer to tab on the c++-mode only:
+    ;; Need install clang-format: brew install clang-format
+    (define-key c++-mode-map [tab] 'clang-format-buffer)
+    ;; Set c++ standard to 14
     (setq flycheck-clang-language-standard "c++14")
-    (setq company-clang-arguments '("-std=c++14")))
+    (setq company-clang-arguments '("-std=c++14"))
+    ;; Set Indentation
+    (setq c-basic-offset 4)
+    (setq tab-width 4))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
