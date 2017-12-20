@@ -58,6 +58,8 @@ values."
      python
      csv
      c-c++
+     ruby
+     rust
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -67,6 +69,7 @@ values."
    '(
      multiple-cursors
      modern-cpp-font-lock
+     racer
      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -410,6 +413,17 @@ you should place your code here."
     ;; Set Indentation
     (setq c-basic-offset 4)
     (setq tab-width 4))
+
+  ;; ==========================================================================
+  ;; rust-mode
+  ;; ==========================================================================
+  (add-hook 'rust-mode-hook #'racer-mode)
+  (add-hook 'racer-mode-hook #'eldoc-mode)
+  (add-hook 'racer-mode-hook #'company-mode)
+  (require 'rust-mode)
+  (define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
+  (setq company-tooltip-align-annotations t)
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
