@@ -417,11 +417,13 @@ you should place your code here."
   ;; ==========================================================================
   ;; rust-mode
   ;; ==========================================================================
+  (require 'rust-mode)
   (add-hook 'rust-mode-hook #'racer-mode)
+  (add-hook 'rust-mode-hook #'rustfmt-enable-on-save)
   (add-hook 'racer-mode-hook #'eldoc-mode)
   (add-hook 'racer-mode-hook #'company-mode)
-  (require 'rust-mode)
   (define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
+  (define-key rust-mode-map (kbd "C-c C-f") #'rustfmt-format-buffer)
   (setq company-tooltip-align-annotations t)
 
   )
