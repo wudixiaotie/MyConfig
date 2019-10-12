@@ -1,5 +1,5 @@
 autoload -U colors && colors
-PS1="%{$fg_bold[green]%}[%n@%m %{$fg_bold[cyan]%}%c]%#%{$reset_color%} "
+PS1="%{$fg_bold[green]%}[%{$fg_bold[yellow]%}%n@%m %{$fg_bold[cyan]%}%c%{$fg_bold[green]%}]%#%{$reset_color%} "
 
 autoload -U compinit
 compinit
