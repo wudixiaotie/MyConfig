@@ -10,7 +10,7 @@ values."
    ;; Base distribution to use. This is a layer contained in the directory
    ;; `+distribution'. For now available distributions are `spacemacs-base'
    ;; or `spacemacs'. (default 'spacemacs)
-   dotspacemacs-distribution 'spacemacs
+   dotspacemacs-distribution 'spacemacs-base
    ;; Lazy installation of layers (i.e. layers are installed only when a file
    ;; with a supported type is opened). Possible values are `all', `unused'
    ;; and `nil'. `unused' will lazy install only unused layers (i.e. layers
@@ -37,40 +37,24 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      ivy
-     auto-completion
+     ;; auto-completion
      ;; better-defaults
-     emacs-lisp
+     ;; emacs-lisp
      ;; git
-     markdown
+     ;; markdown
      ;; org
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      spell-checking
      syntax-checking
-     version-control
-     ;; ----------------------------------------------------------------
-     ;; My layer list
-     ;; ----------------------------------------------------------------
-     erlang
-     erlang-rebar
-     javascript
-     python
-     csv
-     c-c++
-     ruby
-     rust
+     ;; version-control
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages
-   '(
-     multiple-cursors
-     modern-cpp-font-lock
-     racer
-     )
+   dotspacemacs-additional-packages '()
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -275,7 +259,7 @@ values."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers t
+   dotspacemacs-line-numbers nil
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -316,10 +300,6 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  (setq configuration-layer--elpa-archives
-        '(("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
-          ("org-cn"   . "http://elpa.emacs-china.org/org/")
-          ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")))
   )
 
 (defun dotspacemacs/user-config ()
@@ -329,104 +309,27 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  (global-company-mode)
-  (delete-selection-mode 1)
-  (display-time-mode 1)
-
+  (global-display-line-numbers-mode)
   ;; ==========================================================================
   ;; My key-bindings
   ;; ==========================================================================
-  ;; newline-without-break-of-line
-  (defun newline-without-break-of-line ()
-    "1. move to end of the line. 2. insert newline with index"
-    (interactive)
-    (let ((oldpos (point)))
-      (end-of-line)
-      (newline-and-indent)))
-
-  ;; optional key binding
-  (global-set-key [C-tab] 'switch-to-next-buffer)
-  (global-set-key (kbd "<C-return>") 'newline-without-break-of-line)
   (global-set-key (kbd "C-x C-b") 'switch-to-buffer)
-  (setq ivy-re-builders-alist
-        '((swiper . ivy--regex-fuzzy)
-          (t . ivy--regex-fuzzy)))
-
-  ;; ==========================================================================
-  ;; erlang-mode
-  ;; ==========================================================================
-  (add-hook 'erlang-mode-hook 'my-erlang-mode-hook)
-  (defun my-erlang-mode-hook ()
-    ;; when starting an Erlang shell in Emacs, default in the node name
-    (setq inferior-erlang-machine-options '("-sname" "emacs"))
-    ;; add Erlang functions to an imenu menu
-    (imenu-add-to-menubar "imenu")
-    ;; customize keys
-    (local-set-key [return] 'newline-and-indent))
-
-  (add-hook 'erlang-mode-hook 'folding-erlang-mode-hook)
-  (defun folding-erlang-mode-hook ()
-    (setq hs-special-modes-alist
-          (cons '(erlang-mode
-                  "^\\([a-z][a-zA-Z0-9_]*\\|'[^\n']*[^\\]'\\)\\s *(" nil "%"
-                  erlang-end-of-clause) hs-special-modes-alist))
-    (hs-minor-mode 1)
-    (local-set-key [?\M-s] 'hs-toggle-hiding)
-    (local-set-key [?\M-h] 'hs-hide-all)
-    (local-set-key [?\M-u] 'hs-show-all))
-
-  ;; ==========================================================================
-  ;; comment
-  ;; ==========================================================================
-  (global-set-key (kbd "C-c C-x") 'comment-or-uncomment-region)
-
-  ;; ==========================================================================
-  ;; multiple-cursors
-  ;; ==========================================================================
-  (require 'multiple-cursors)
-  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
-  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-  (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
-
-  ;; ==========================================================================
-  ;; Scrolling
-  ;; ==========================================================================
-  (setq mouse-wheel-progressive-speed nil)
-  (setq mouse-wheel-follow-mouse 't)
-  (setq mac-mouse-wheel-mode t)
-  (setq mac-mouse-wheel-smooth-scroll t)
-
-  ;; ==========================================================================
-  ;; c-c++-mode
-  ;; ==========================================================================
-  (add-hook 'c++-mode-hook #'modern-c++-font-lock-mode)
-  (setq c-c++-default-mode-for-headers 'c++-mode)
-  (setq c-c++-enable-clang-support t)
-  (add-hook 'c++-mode-hook 'my-c++-model-hook)
-  (defun my-c++-model-hook ()
-    ;; Bind clang-format-buffer to tab on the c++-mode only:
-    ;; Need install clang-format: brew install clang-format
-    (define-key c++-mode-map [tab] 'clang-format-buffer)
-    ;; Set c++ standard to 14
-    (setq flycheck-clang-language-standard "c++14")
-    (setq company-clang-arguments '("-std=c++14"))
-    ;; Set Indentation
-    (setq c-basic-offset 4)
-    (setq tab-width 4))
-
-  ;; ==========================================================================
-  ;; rust-mode
-  ;; ==========================================================================
-  (require 'rust-mode)
-  (add-hook 'rust-mode-hook #'racer-mode)
-  (add-hook 'rust-mode-hook #'rustfmt-enable-on-save)
-  (add-hook 'racer-mode-hook #'eldoc-mode)
-  (add-hook 'racer-mode-hook #'company-mode)
-  (define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
-  (define-key rust-mode-map (kbd "C-c C-f") #'rustfmt-format-buffer)
-  (setq company-tooltip-align-annotations t)
-
+  (global-set-key (kbd "C-g") 'goto-line)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (flyspell-correct-ivy flyspell-correct flycheck-pos-tip pos-tip flycheck dash auto-dictionary which-key wgrep use-package smex pcre2el macrostep ivy-hydra helm-make flx exec-path-from-shell evil-visualstar evil-escape elisp-slime-nav diminish counsel-projectile bind-map auto-compile async ace-window))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
