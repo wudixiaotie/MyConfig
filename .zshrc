@@ -13,8 +13,8 @@ export LSCOLORS=ExFxGxDxCxegedabagaced
 autoload -U compinit
 compinit
 
-# brew install zsh-syntax-highlighting
-# cd /usr/local/share/
-# sudo chmod -R 755 zsh
-# sudo chown -R root:staff zsh
+#brew install zsh-syntax-highlighting
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+#brew bottle source
+export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
