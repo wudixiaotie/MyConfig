@@ -13,6 +13,9 @@ export LSCOLORS=ExFxGxDxCxegedabagaced
 autoload -U compinit
 compinit
 
+autoload -U select-word-style
+select-word-style bash
+
 #brew install zsh-syntax-highlighting
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
