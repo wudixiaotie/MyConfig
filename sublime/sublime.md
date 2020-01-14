@@ -29,9 +29,6 @@ Settings-User:{
 }
 
 
-
-
-
 Key Bindings-User:
 [ 
     { "keys": ["super+e", "super+d"], "command": "reindent" },
@@ -64,3 +61,11 @@ Key Bindings-User:
     { "keys": ["alt+."], "command": "goto_definition" }
 ]
 
+
+Packages:
+Expand Tabs on Save
+C++ Starting Kit
+Move By Paragraph
+Oasis Theme
+Stupid Indent
+Theme - Soda
