@@ -15,7 +15,6 @@ fi
 #export PS1="\n${debian_chroot:+($debian_chroot)}\342\224\214\[\e[01;32m\][\[\e[33m\]\u\[\e[31m\]@\[\e[34m\]\h\[\e[37m\]:\[\e[36m\]\w\[\e[32m\]]\[\e[01;m\]\n\342\224\224\[\e[01;36m\]$\[\e[m\] "
 
 PROMPT_COMMAND=my_prompt_command
-
 function my_prompt_command() {
     local exit_code=$?
     local prompt_prefix="${BCYAN}"
@@ -46,4 +45,12 @@ function my_prompt_command() {
     local BCYAN='\[\e[1;36m\]'
     local BGCYAN='\[\e[1;36m\]'
     local WHITE='\[\e[0;37m\]'
-".bash_profile" 59L, 1816C
+    local BWHITE='\[\e[1;37m\]'
+    local BGWHITE='\[\e[1;37m\]'
+
+    if [ $exit_code -ne 0  ]; then
+        prompt_prefix="${BRED}(${exit_code})"
+    fi
+
+    PS1="\n${BGREEN}[${BYELLOW}\D{%m/%d} ${BGREEN}\t:${BCYAN}\w${BGREEN}]\n${prompt_prefix}>${DF} "
+}
