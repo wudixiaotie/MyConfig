@@ -9,6 +9,7 @@ export GREP_OPTIONS='--color=always'
 export GREP_COLOR='1;36;40'
 export CLICOLOR=1
 export LSCOLORS=ExFxGxDxCxegedabagaced
+setopt  no_nomatch
 
 autoload -U compinit
 compinit
