@@ -44,18 +44,8 @@
         "command": "-workbench.action.gotoLine"
     },
     {
-        "key": "ctrl+alt+n",
-        "command": "block-travel.jumpDown",
-        "when": "editorTextFocus"
-    },
-    {
         "key": "alt+down",
         "command": "-block-travel.jumpDown",
-        "when": "editorTextFocus"
-    },
-    {
-        "key": "ctrl+alt+p",
-        "command": "block-travel.jumpUp",
         "when": "editorTextFocus"
     },
     {
@@ -64,18 +54,8 @@
         "when": "editorTextFocus"
     },
     {
-        "key": "shift+alt+p",
-        "command": "block-travel.selectUp",
-        "when": "editorTextFocus"
-    },
-    {
         "key": "shift+alt+up",
         "command": "-block-travel.selectUp",
-        "when": "editorTextFocus"
-    },
-    {
-        "key": "shift+alt+n",
-        "command": "block-travel.selectDown",
         "when": "editorTextFocus"
     },
     {
@@ -300,5 +280,21 @@
         "key": "alt+v",
         "command": "-emacs.cursorPageUp",
         "when": "editorTextFocus && !suggestWidgetVisible"
+    },
+    {
+        "key": "alt+n",
+        "command": "spaceBlockJumper.moveDown"
+    },
+    {
+        "key": "alt+p",
+        "command": "spaceBlockJumper.moveUp"
+    },
+    {
+        "key": "shift+alt+n",
+        "command": "spaceBlockJumper.selectDown"
+    },
+    {
+        "key": "shift+alt+p",
+        "command": "spaceBlockJumper.selectUp"
     }
 ]
